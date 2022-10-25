@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Siswa;
+use App\Models\Book;
 
-class SiswaController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,10 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $table = Siswa::all();
+        $table = Book::all();
 
         return response()->json([
-            'message' => 'Load Data Success!',
+            'message' => 'Load Data Book Success!',
             'data' => $table
         ], 200);
     }
@@ -30,15 +30,15 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $table = Siswa::create([
-            "name" => $request->name,
-            "gender" => $request->gender,
-            "age" => $request->age
+        $table = Book::create([
+            "book" => $request->book,
+            "author" => $request->author,
+            "year" => $request->year
         ]);
 
         return response()->json([
-            "message"=>"Store Data Success!",
-            "data"=>$table
+            "message"=>"Store Data Book Success!",
+            "book"=>$table
         ], 201);
     }
 
@@ -50,11 +50,11 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        $table = Siswa::find($id);
+        $table = Book::find($id);
         if($table){
             return $table;
         }else{
-            return ["message" => "Data Not Found!"];
+            return ["message" => "Data Book Not Found!"];
         }
     }
 
@@ -67,16 +67,16 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $table = Siswa::find($id);
+        $table = Book::find($id);
         if($table){
-            $table->name = $request->name ? $request->name : $table->name;
-            $table->gender = $request->gender ? $request->gender : $table->gender;
-            $table->age = $request->age ? $request->age : $table->age;
+            $table->book = $request->book ? $request->book : $table->book;
+            $table->author = $request->author ? $request->author : $table->author;
+            $table->year = $request->year ? $request->year : $table->year;
             $table->save();
 
             return $table;
         }else{
-            return ["message"=>"Data Not Found!"];
+            return ["message"=>"Data Book Not Found!"];
         }
     }
 
@@ -88,13 +88,13 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        $table = Siswa::find($id);
+        $table = Book::find($id);
         if($table){
             $table->delete();
 
-            return ["message"=>"Delete Data Success!"]; 
+            return ["message"=>"Delete Book Success!"]; 
         }else{
-            return ["message"=>"Data Not Found!"];
+            return ["message"=>"Data Book Not Found!"];
         }
     }
 }
