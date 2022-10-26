@@ -31,9 +31,11 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $table = Book::create([
-            "book" => $request->book,
+            "title" => $request->title,
+            "description" => $request->description,
             "author" => $request->author,
-            "year" => $request->year
+            "publisher" => $request->publisher,
+            "date_of_issue" => $request->date_of_issue
         ]);
 
         return response()->json([
@@ -69,9 +71,11 @@ class BookController extends Controller
     {
         $table = Book::find($id);
         if($table){
-            $table->book = $request->book ? $request->book : $table->book;
+            $table->title = $request->title ? $request->title : $table->title;
+            $table->description = $request->description ? $request->description : $table->description;
             $table->author = $request->author ? $request->author : $table->author;
-            $table->year = $request->year ? $request->year : $table->year;
+            $table->publisher = $request->publisher ? $request->publisher : $table->publisher;
+            $table->date_of_issue = $request->date_of_issue ? $request->date_of_issue : $table->date_of_issue;
             $table->save();
 
             return $table;
